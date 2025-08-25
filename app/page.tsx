@@ -19,11 +19,11 @@ import {
   Star,
 } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Input } from '../components/ui/input';
+import { Textarea } from '../components/ui/textarea';
+import { ThemeToggle } from '../components/theme-toggle';
 
 /* --------------------------------- BRAND --------------------------------- */
 const BRAND = {
