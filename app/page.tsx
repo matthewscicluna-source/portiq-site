@@ -23,6 +23,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 /* --------------------------------- BRAND --------------------------------- */
 const BRAND = {
@@ -62,9 +63,9 @@ function LogoMark({ className = 'h-9 w-9' }: { className?: string }) {
 /* --------------------------------- PAGE ---------------------------------- */
 export default function CorporateWebsite() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-800">
+    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-800 dark:from-slate-950 dark:to-slate-900 dark:text-slate-200">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:bg-slate-900/80 dark:border-slate-800">
         <div className="mx-auto flex w-full max-w-[1600px] 2xl:max-w-[1800px] items-center justify-between px-4 py-3">
           <a href="#top" className="flex items-center gap-2 font-bold text-xl tracking-tight">
             <LogoMark className="h-12 w-12" />
@@ -72,28 +73,36 @@ export default function CorporateWebsite() {
               {BRAND.name}
             </span>
           </a>
-          <nav className="hidden gap-6 md:flex">
-            {[
-              { label: 'Services', href: '#services' },
-              { label: 'Packages', href: '#packages' },
-              { label: 'Process', href: '#process' },
-              { label: 'About', href: '#about' },
-              { label: 'Contact', href: '#contact' },
-            ].map((n) => (
-              <a key={n.href} href={n.href} className="text-sm hover:text-sky-600" aria-label={`Go to ${n.label}`}>
-                {n.label}
+
+          <nav className="hidden items-center gap-6 md:flex">
+            <a href="#services" className="text-sm hover:text-sky-600 dark:hover:text-sky-400">Services</a>
+            <a href="#packages" className="text-sm hover:text-sky-600 dark:hover:text-sky-400">Packages</a>
+            <a href="#process"  className="text-sm hover:text-sky-600 dark:hover:text-sky-400">Process</a>
+            <a href="#about"    className="text-sm hover:text-sky-600 dark:hover:text-sky-400">About</a>
+            <a href="#contact"  className="text-sm hover:text-sky-600 dark:hover:text-sky-400">Contact</a>
+
+            {/* Theme toggle + CTA */}
+            <div className="ml-2 hidden items-center gap-2 md:flex">
+              <ThemeToggle />
+              <a href="#contact">
+                <Button>Let’s talk</Button>
               </a>
-            ))}
+            </div>
           </nav>
-          <a href="#contact" className="hidden md:inline-flex">
-            <Button>Let’s talk</Button>
-          </a>
+
+          {/* Mobile CTA + toggle (optional; show on small screens) */}
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <a href="#contact">
+              <Button size="sm">Let’s talk</Button>
+            </a>
+          </div>
         </div>
       </header>
 
       {/* Hero */}
       <section id="top" className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-300 via-transparent to-transparent" />
+        <div className="absolute inset-0 -z-10 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-300 via-transparent to-transparent dark:from-sky-900/30" />
         <div className="mx-auto grid w-full max-w-[1600px] 2xl:max-w-[1800px] items-center gap-10 px-4 py-20 md:grid-cols-2 md:py-28">
           <div>
             {/* Hero logo removed */}
@@ -105,10 +114,12 @@ export default function CorporateWebsite() {
             >
               Win more customers with
               <span className={`block bg-gradient-to-r bg-clip-text text-transparent ${BRAND.accent}`}>
-                data-driven marketing
+                data‑driven marketing
               </span>
             </motion.h1>
-            <p className="mt-5 text-[clamp(1rem,1.2vw,1.375rem)] text-slate-600">{BRAND.description}</p>
+            <p className="mt-5 text-[clamp(1rem,1.2vw,1.375rem)] text-slate-600 dark:text-slate-300">
+              {BRAND.description}
+            </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a href="#contact">
                 <Button className="h-11 px-6">Get a free audit</Button>
@@ -117,25 +128,19 @@ export default function CorporateWebsite() {
                 See packages <ArrowRight className="ml-1 h-4 w-4" />
               </a>
             </div>
-            <div className="mt-8 flex items-center gap-6 text-sm text-slate-500">
-              <span className="inline-flex items-center gap-2">
-                <Shield className="h-4 w-4" /> GDPR-ready
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <BadgeCheck className="h-4 w-4" /> Transparent reporting
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Star className="h-4 w-4" /> Local expertise
-              </span>
+            <div className="mt-8 flex items-center gap-6 text-sm text-slate-500 dark:text-slate-400">
+              <span className="inline-flex items-center gap-2"><Shield className="h-4 w-4" /> GDPR‑ready</span>
+              <span className="inline-flex items-center gap-2"><BadgeCheck className="h-4 w-4" /> Transparent reporting</span>
+              <span className="inline-flex items-center gap-2"><Star className="h-4 w-4" /> Local expertise</span>
             </div>
           </div>
 
-          <Card className="rounded-2xl shadow-xl">
+          <Card className="rounded-2xl shadow-xl dark:border-slate-800">
             <CardHeader>
-              <CardTitle className="text-xl">Free Growth Snapshot (48-hour turnaround)</CardTitle>
+              <CardTitle className="text-xl">Free Growth Snapshot (48‑hour turnaround)</CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-3 text-sm text-slate-600">
+              <ul className="space-y-3 text-sm text-slate-600 dark:text-slate-300">
                 {[
                   'SEO health & quick wins',
                   'Ad account hygiene check (Meta/Google)',
@@ -158,9 +163,12 @@ export default function CorporateWebsite() {
 
       {/* Logos / social proof (placeholders) */}
       <section aria-label="Trusted by" className="py-8">
-        <div className="mx-auto grid w-full max-w-[1600px] 2xl:max-w-[1800px] grid-cols-2 gap-6 px-4 opacity-70 md:grid-cols-5">
+        <div className="mx-auto grid w/full max-w-[1600px] 2xl:max-w-[1800px] grid-cols-2 gap-6 px-4 opacity-70 md:grid-cols-5">
           {['Client One', 'Client Two', 'Client Three', 'Client Four', 'Client Five'].map((c) => (
-            <div key={c} className="flex h-12 items-center justify-center rounded-xl bg-slate-200 text-xs md:text-sm">
+            <div
+              key={c}
+              className="flex h-12 items-center justify-center rounded-xl bg-slate-200 text-xs md:text-sm dark:bg-slate-800/70"
+            >
               {c}
             </div>
           ))}
@@ -172,27 +180,27 @@ export default function CorporateWebsite() {
         <div className="mx-auto w-full max-w-[1600px] 2xl:max-w-[1800px] px-4">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold md:text-4xl">What we do</h2>
-            <p className="mt-3 text-slate-600">Full-funnel digital marketing tailored for Malta’s market.</p>
+            <p className="mt-3 text-slate-600 dark:text-slate-300">Full‑funnel digital marketing tailored for Malta’s market.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
             {[
-              { icon: Megaphone, title: 'Performance Ads', desc: 'ROI-focused campaigns on Google, Meta, and TikTok with proper conversion tracking.' },
+              { icon: Megaphone, title: 'Performance Ads', desc: 'ROI‑focused campaigns on Google, Meta, and TikTok with proper conversion tracking.' },
               { icon: Globe, title: 'SEO & Content', desc: 'Technical SEO, local SEO for Malta, and content that ranks and converts.' },
               { icon: ChartBar, title: 'Analytics & CRO', desc: 'GA4, Tag Manager, Looker Studio dashboards, and A/B testing to lift conversion rate.' },
-              { icon: Users, title: 'Social & Creative', desc: 'On-brand assets and calendars with UGC and short-form video support.' },
+              { icon: Users, title: 'Social & Creative', desc: 'On‑brand assets and calendars with UGC and short‑form video support.' },
               { icon: Calendar, title: 'Marketing Ops', desc: 'Automation, CRM hygiene, lead routing, and consent tracking (GDPR).' },
-              { icon: Rocket, title: 'Go-to-Market', desc: 'For startups: positioning, ICP, messaging, and launch playbooks.' },
+              { icon: Rocket, title: 'Go‑to‑Market', desc: 'For startups: positioning, ICP, messaging, and launch playbooks.' },
             ].map(({ icon: Icon, title, desc }) => (
-              <Card key={title} className="rounded-2xl">
+              <Card key={title} className="rounded-2xl dark:border-slate-800">
                 <CardHeader>
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50">
-                    <Icon className="h-6 w-6 text-sky-600" />
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20">
+                    <Icon className="h-6 w-6 text-sky-600 dark:text-sky-400" />
                   </div>
                   <CardTitle className="mt-4 text-xl">{title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-slate-600">{desc}</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-300">{desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -201,15 +209,67 @@ export default function CorporateWebsite() {
       </section>
 
       {/* Packages */}
-      <section id="packages" className="bg-white py-16">
+      <section id="packages" className="bg-white py-16 dark:bg-slate-950">
         <div className="mx-auto w-full max-w-[1600px] 2xl:max-w-[1800px] px-4">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold md:text-4xl">Simple packages, clear value</h2>
-            <p className="mt-3 text-slate-600">Start small or scale fast—swap or cancel monthly.</p>
+            <p className="mt-3 text-slate-600 dark:text-slate-300">Start small or scale fast—swap or cancel monthly.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {/* ... package cards unchanged ... */}
+            {[
+              {
+                name: 'Starter',
+                price: '€750/mo',
+                highlight: 'Best for solo founders & SMEs',
+                features: ['1 channel (SEO or Ads)', 'Monthly reporting', 'Landing page audit', 'Basic GA4 setup'],
+                cta: 'Start Starter',
+                popular: false,
+              },
+              {
+                name: 'Growth',
+                price: '€1,950/mo',
+                highlight: 'Most popular for scaling brands',
+                features: ['2–3 channels (SEO + Ads + Social)', 'Weekly optimisation', 'Conversion tracking & CRO', 'Looker Studio dashboard'],
+                cta: 'Choose Growth',
+                popular: true,
+              },
+              {
+                name: 'Scale',
+                price: '€3,500+/mo',
+                highlight: 'Custom stack & roadmap',
+                features: ['Full‑funnel strategy', 'Creative production', 'A/B testing & experiments', 'Attribution & LTV models'],
+                cta: 'Talk to sales',
+                popular: false,
+              },
+            ].map((tier) => (
+              <Card key={tier.name} className={`relative rounded-2xl dark:border-slate-800 ${tier.popular ? 'ring-2 ring-sky-500/80 dark:ring-sky-400/60' : ''}`}>
+                {tier.popular && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-sky-600 px-3 py-1 text-xs text-white shadow dark:bg-sky-500">
+                    Popular
+                  </span>
+                )}
+                <CardHeader>
+                  <CardTitle className="flex items-center justify-between text-2xl">
+                    <span>{tier.name}</span>
+                    <span className="text-xl font-semibold text-sky-600 dark:text-sky-400">{tier.price}</span>
+                  </CardTitle>
+                  <p className="text-sm text-slate-600 dark:text-slate-300">{tier.highlight}</p>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 text-sm">
+                    {tier.features.map((f) => (
+                      <li key={f} className="flex items-start gap-2">
+                        <Check className="mt-0.5 h-5 w-5 text-green-600" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <a href="#contact">
+                    <Button className="mt-5 h-11 w-full">{tier.cta}</Button>
+                  </a>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -219,34 +279,132 @@ export default function CorporateWebsite() {
         <div className="mx-auto w-full max-w-[1600px] 2xl:max-w-[1800px] px-4">
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold md:text-4xl">How we work</h2>
-            <p className="mt-3 text-slate-600">Fast onboarding, measurable outcomes.</p>
+            <p className="mt-3 text-slate-600 dark:text-slate-300">Fast onboarding, measurable outcomes.</p>
           </div>
-          {/* ... process cards unchanged ... */}
+
+          <div className="grid gap-6 md:grid-cols-4">
+            {[
+              { icon: Sparkles, title: 'Audit', desc: 'Snap analysis of your website, ads, and analytics to spot quick wins.' },
+              { icon: Users, title: 'Plan', desc: 'Agree KPIs, channels, and budget. Setup tracking & dashboards.' },
+              { icon: Rocket, title: 'Launch', desc: 'Ship creative, campaigns, and content. Iterate weekly.' },
+              { icon: ChartBar, title: 'Scale', desc: 'Optimise bids, SEO, and CRO to push CAC down and LTV up.' },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <Card key={title} className="rounded-2xl dark:border-slate-800">
+                <CardHeader>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-900/20 dark:to-blue-900/20">
+                    <Icon className="h-6 w-6 text-sky-600 dark:text-sky-400" />
+                  </div>
+                  <CardTitle className="mt-4 text-lg">
+                    {i + 1}. {title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-slate-600 dark:text-slate-300">{desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* About */}
-      <section id="about" className="bg-white py-16">
+      <section id="about" className="bg-white py-16 dark:bg-slate-950">
         <div className="mx-auto grid w-full max-w-[1600px] 2xl:max-w-[1800px] items-center gap-10 px-4 md:grid-cols-2">
-          {/* ... about content unchanged ... */}
+          <div>
+            <h2 className="text-3xl font-bold md:text-4xl">Local team. Global standards.</h2>
+            <p className="mt-4 text-slate-600 dark:text-slate-300">
+              We blend Malta‑based market insight with enterprise‑grade marketing ops, drawing on experience across tech,
+              gaming, hospitality, and retail. Expect clarity, candour, and measurable growth.
+            </p>
+            <ul className="mt-6 space-y-3 text-sm text-slate-700 dark:text-slate-300/90">
+              <li className="flex items-start gap-2"><Check className="mt-0.5 h-5 w-5 text-green-600" /> Based in Malta; EU contracts & invoices</li>
+              <li className="flex items-start gap-2"><Check className="mt-0.5 h-5 w-5 text-green-600" /> GDPR‑compliant tracking by default</li>
+              <li className="flex items-start gap-2"><Check className="mt-0.5 h-5 w-5 text-green-600" /> Clear, board‑ready reporting</li>
+            </ul>
+          </div>
+          <Card className="rounded-2xl dark:border-slate-800">
+            <CardHeader>
+              <CardTitle>Tools we love</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 gap-3 text-center text-sm md:grid-cols-3">
+                {['GA4','GTM','Looker Studio','Search Console','Ahrefs','Semrush','Meta Ads','Google Ads','Hotjar','Webflow','WordPress','Supermetrics'].map(t => (
+                  <div key={t} className="rounded-xl border p-3 dark:border-slate-800">{t}</div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
       {/* Contact */}
       <section id="contact" className="py-16 md:py-24">
         <div className="mx-auto w-full max-w-[1600px] 2xl:max-w-[1800px] px-4">
-          {/* ... contact form unchanged ... */}
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold md:text-4xl">Let’s grow your pipeline</h2>
+            <p className="mt-3 text-slate-600 dark:text-slate-300">Tell us a bit about your goals. We’ll reply within one business day.</p>
+          </div>
+          <div className="grid items-start gap-6 md:grid-cols-3">
+            <Card className="rounded-2xl md:col-span-2 dark:border-slate-800">
+              <CardContent className="p-6">
+                <form className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div>
+                    <label className="text-sm">Name</label>
+                    <Input placeholder="Your full name" aria-label="Name" />
+                  </div>
+                  <div>
+                    <label className="text-sm">Email</label>
+                    <Input type="email" placeholder="you@company.com" aria-label="Email" />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className="text-sm">Company</label>
+                    <Input placeholder="Company Ltd" aria-label="Company" />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className="text-sm">What do you need?</label>
+                    <Textarea rows={5} placeholder="e.g., SEO audit, new PPC strategy, analytics setup…" aria-label="Message" />
+                  </div>
+                  <div className="md:col-span-2">
+                    <Button className="h-11 w-full" type="button">Send enquiry</Button>
+                  </div>
+                </form>
+                <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+                  By submitting, you agree to our processing your data to respond to your enquiry. No spam, ever.
+                </p>
+              </CardContent>
+            </Card>
+
+            <div className="space-y-4">
+              <Card className="rounded-2xl dark:border-slate-800">
+                <CardContent className="space-y-3 p-6 text-sm">
+                  <div className="flex items-center gap-2"><Phone className="h-4 w-4" /> +356 99 000 000</div>
+                  <div className="flex items-center gap-2"><Mail className="h-4 w-4" /> hello@portiq.mt</div>
+                  <div className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Malta</div>
+                </CardContent>
+              </Card>
+              <Card className="rounded-2xl dark:border-slate-800">
+                <CardHeader><CardTitle>Project fit</CardTitle></CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-300/90">
+                    <li className="flex items-start gap-2"><Check className="mt-0.5 h-5 w-5 text-green-600" /> We work best with €2k–€50k/mo ad spend</li>
+                    <li className="flex items-start gap-2"><Check className="mt-0.5 h-5 w-5 text-green-600" /> In‑house contact for fast feedback</li>
+                    <li className="flex items-start gap-2"><Check className="mt-0.5 h-5 w-5 text-green-600" /> Access to analytics & ad accounts</li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t bg-white py-10">
-        <div className="mx-auto flex w-full max-w-[1600px] 2xl:max-w-[1800px] flex-col items-center justify-between gap-4 px-4 text-sm text-slate-500 md:flex-row">
+      <footer className="border-t bg-white dark:bg-slate-900 py-10">
+        <div className="mx-auto flex w-full max-w-[1600px] 2xl:max-w-[1800px] flex-col items-center justify-between gap-4 px-4 text-sm text-slate-500 dark:text-slate-400 md:flex-row">
           <div>© {new Date().getFullYear()} {BRAND.name}. All rights reserved.</div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-sky-600">Privacy</a>
-            <a href="#" className="hover:text-sky-600">Cookies</a>
-            <a href="#contact" className="hover:text-sky-600">Contact</a>
+            <a href="#" className="hover:text-sky-600 dark:hover:text-sky-400">Privacy</a>
+            <a href="#" className="hover:text-sky-600 dark:hover:text-sky-400">Cookies</a>
+            <a href="#contact" className="hover:text-sky-600 dark:hover:text-sky-400">Contact</a>
           </div>
         </div>
       </footer>
