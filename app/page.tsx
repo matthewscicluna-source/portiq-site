@@ -1,103 +1,163 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { motion } from 'framer-motion';
+import {
+  Check,
+  Phone,
+  Mail,
+  MapPin,
+  Sparkles,
+  Rocket,
+  Megaphone,
+  ChartBar,
+  Globe,
+  Users,
+  Calendar,
+  ArrowRight,
+  Shield,
+  BadgeCheck,
+  Star,
+} from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+
+/* --------------------------------- BRAND --------------------------------- */
+const BRAND = {
+  name: 'PortIQ',
+  tagline: 'Smart Digital Growth Navigation',
+  primary: 'from-sky-600 to-blue-600',
+  accent: 'from-cyan-500 to-sky-500',
+  description:
+    'PortIQ helps businesses navigate the digital landscape with data-driven marketing, SEO, and analytics that deliver measurable growth.',
+};
+
+/* ------------------------------- LOGO (SVG) ------------------------------- */
+function LogoMark({ className = 'h-9 w-9' }: { className?: string }) {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <svg
+      className={className}
+      viewBox="0 0 48 48"
+      role="img"
+      aria-label="PortIQ compass logo"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="portiq-g" x1="0" y1="0" x2="48" y2="48">
+          <stop stopColor="#06b6d4" />
+          <stop offset="1" stopColor="#2563eb" />
+        </linearGradient>
+      </defs>
+      <circle cx="24" cy="24" r="18" stroke="url(#portiq-g)" strokeWidth="2.5" />
+      <circle cx="24" cy="24" r="3" fill="url(#portiq-g)" />
+      <path d="M24 7v6M24 35v6M7 24h6M35 24h6" stroke="url(#portiq-g)" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M30 18l-4 8-8 4 4-8 8-4z" fill="url(#portiq-g)" opacity="0.25" />
+    </svg>
+  );
+}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+/* --------------------------------- PAGE ---------------------------------- */
+export default function CorporateWebsite() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-800">
+      {/* Header */}
+      <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <div className="mx-auto flex w-full max-w-[1600px] 2xl:max-w-[1800px] items-center justify-between px-4 py-4 md:py-6">
+          <a href="#top" className="flex items-center gap-3 font-bold tracking-tight">
+            <LogoMark className="h-16 w-16 md:h-24 md:w-24" />
+            <span className={`text-3xl md:text-5xl bg-gradient-to-r bg-clip-text text-transparent ${BRAND.primary}`}>
+              {BRAND.name}
+            </span>
           </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+          <nav className="hidden gap-6 md:flex">
+            {[
+              { label: 'Services', href: '#services' },
+              { label: 'Packages', href: '#packages' },
+              { label: 'Process', href: '#process' },
+              { label: 'About', href: '#about' },
+              { label: 'Contact', href: '#contact' },
+            ].map((n) => (
+              <a key={n.href} href={n.href} className="text-sm hover:text-sky-600" aria-label={`Go to ${n.label}`}>
+                {n.label}
+              </a>
+            ))}
+          </nav>
+          <a href="#contact" className="hidden md:inline-flex">
+            <Button>Let’s talk</Button>
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </header>
+
+      {/* Hero */}
+      <section id="top" className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-300 via-transparent to-transparent" />
+        <div className="mx-auto grid w-full max-w-[1600px] 2xl:max-w-[1800px] items-center gap-10 px-4 py-20 md:grid-cols-2 md:py-28">
+          <div>
+            {/* Removed hero logo */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="font-extrabold tracking-tight text-[clamp(2.25rem,4vw,5rem)]"
+            >
+              Win more customers with
+              <span className={`block bg-gradient-to-r bg-clip-text text-transparent ${BRAND.accent}`}>
+                data-driven marketing
+              </span>
+            </motion.h1>
+            <p className="mt-5 text-[clamp(1rem,1.2vw,1.375rem)] text-slate-600">{BRAND.description}</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <a href="#contact">
+                <Button className="h-11 px-6">Get a free audit</Button>
+              </a>
+              <a href="#packages" className="inline-flex items-center text-sm font-medium hover:underline">
+                See packages <ArrowRight className="ml-1 h-4 w-4" />
+              </a>
+            </div>
+            <div className="mt-8 flex items-center gap-6 text-sm text-slate-500">
+              <span className="inline-flex items-center gap-2">
+                <Shield className="h-4 w-4" /> GDPR-ready
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <BadgeCheck className="h-4 w-4" /> Transparent reporting
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <Star className="h-4 w-4" /> Local expertise
+              </span>
+            </div>
+          </div>
+
+          <Card className="rounded-2xl shadow-xl">
+            <CardHeader>
+              <CardTitle className="text-xl">Free Growth Snapshot (48-hour turnaround)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-3 text-sm text-slate-600">
+                {[
+                  'SEO health & quick wins',
+                  'Ad account hygiene check (Meta/Google)',
+                  'Analytics & conversion tracking review',
+                  'Competitor visibility in Malta',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <Check className="mt-0.5 h-5 w-5 text-green-600" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href="#contact">
+                <Button className="mt-6 h-11 w-full">Request my snapshot</Button>
+              </a>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* For the rest of the sections… */}
+      {/* Change every `max-w-6xl` to `w-full max-w-[1600px] 2xl:max-w-[1800px]` the same way */}
     </div>
   );
 }
